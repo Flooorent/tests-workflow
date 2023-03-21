@@ -31,7 +31,7 @@ jobs:
         uses: peterjgrainger/action-create-branch@v2.2.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEW_BRANCH_NAME: ${GITHUB_HEAD_REF#release/}
+          NEW_BRANCH_NAME: ${{GITHUB_HEAD_REF#release/}}
         with:
-          branch: 'refs/heads/prod/${NEW_BRANCH_NAME}'
+          branch: 'refs/heads/prod/${{env.NEW_BRANCH_NAME}}'
           sha: '${{ github.event.pull_request.head.sha }}'
