@@ -32,5 +32,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: 'refs/heads/prod/${GITHUB_HEAD_REF#release/}'
+          branch: refs/heads/prod/${GITHUB_HEAD_REF#release/}
           sha: '${{ github.event.pull_request.head.sha }}'
