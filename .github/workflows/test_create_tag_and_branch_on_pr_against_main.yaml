@@ -1,0 +1,36 @@
+name: test_create_tag_and_branch_on_pr_against_main
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository code
+        uses: actions/checkout@v3
+
+      - name: display env
+        run: |
+          env
+
+      - name: display GITHUB_HEAD_REF
+        run: |
+          echo "$GITHUB_HEAD_REF"
+
+      - name: display GITHUB_HEAD_REF stripped
+        run: |
+          echo "${GITHUB_HEAD_REF##*}"
+
+      - name: create prod branch
+        uses: peterjgrainger/action-create-branch@v2.2.0
+        #env:
+        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: 'refs/heads/prod/${GITHUB_HEAD_REF##*/}'
+          sha: '${{ github.event.pull_request.head.sha }}'
