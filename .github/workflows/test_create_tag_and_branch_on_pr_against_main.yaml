@@ -27,15 +27,15 @@ jobs:
           branch: 'refs/heads/prod/${{ env.TAG_NAME }}'
           sha: '${{ github.event.pull_request.head.sha }}'
 
-      - name: create tag
-        uses: rickstaa/action-create-tag@v1
-        with:
-          tag: '${{ env.TAG_NAME }}'
-          message: ${{ github.event.pull_request.body }}
-
       #- name: create tag
-      #  uses: mathieudutour/github-tag-action@v6.1
+      #  uses: rickstaa/action-create-tag@v1
       #  with:
-      #    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #    commit_sha: '${{ github.event.pull_request.head.sha }}'
-      #    custom_tag: '${{ env.TAG_NAME }}'
+      #    tag: '${{ env.TAG_NAME }}'
+      #    message: ${{ github.event.pull_request.body }}
+
+      - name: create tag
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_sha: '${{ github.event.pull_request.head.sha }}'
+          custom_tag: '${{ env.TAG_NAME }}'
