@@ -5,3 +5,4 @@
   - test with already existing branch
 - test 2: create tag after merging PR against `main`
   - use correct commit sha
+  - specifying commit sha doesn't work, update main branch protection rule and require linear history
