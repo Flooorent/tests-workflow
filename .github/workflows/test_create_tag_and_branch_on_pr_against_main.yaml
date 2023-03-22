@@ -15,26 +15,20 @@ jobs:
       - name: check out repository code
         uses: actions/checkout@v3
 
-      - name: display env
+      - name: set tag name as env var
         run: |
-          env
-
-      - name: display GITHUB_HEAD_REF
-        run: |
-          echo "$GITHUB_HEAD_REF"
-
-      - name: display GITHUB_HEAD_REF stripped
-        run: |
-          echo "${GITHUB_HEAD_REF#release/}"
-
-      - name: set env var
-        run: |
-          echo "NEW_BRANCH_NAME=${GITHUB_HEAD_REF#release/}" >> $GITHUB_ENV
+          echo "TAG_NAME=${GITHUB_HEAD_REF#release/}" >> $GITHUB_ENV
 
       - name: create prod branch
         uses: peterjgrainger/action-create-branch@v2.2.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: 'refs/heads/prod/${{ env.NEW_BRANCH_NAME }}'
+          branch: 'refs/heads/prod/${{ env.TAG_NAME }}'
           sha: '${{ github.event.pull_request.head.sha }}'
+
+      - name: create tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: '${{ env.TAG_NAME }}'
+          message: '${{ github.event.pull_request.body }}'
