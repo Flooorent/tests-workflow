@@ -32,3 +32,4 @@ jobs:
         with:
           tag: '${{ env.TAG_NAME }}'
           message: '${{ github.event.pull_request.body }}'
+          commit_sha: '${{ github.event.pull_request.head.sha }}'
