@@ -18,7 +18,6 @@ jobs:
       - name: set env vars
         run: |
           echo "TAG_NAME=${GITHUB_HEAD_REF#release/}" >> $GITHUB_ENV
-          echo "COMMIT_SHA=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
 
       - name: create prod branch
         uses: peterjgrainger/action-create-branch@v2.2.0
@@ -33,4 +32,3 @@ jobs:
         with:
           tag: '${{ env.TAG_NAME }}'
           message: '${{ github.event.pull_request.body }}'
-          commit_sha: '${{ env.COMMIT_SHA }}'
