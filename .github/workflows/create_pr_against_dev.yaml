@@ -16,5 +16,6 @@ jobs:
 
       - name: Create Pull Request against dev
         uses: peter-evans/create-pull-request@v4
-        base: dev
-        branch: ${GITHUB_HEAD_REF}
+        with:
+          base: dev
+          branch: ${GITHUB_HEAD_REF}
