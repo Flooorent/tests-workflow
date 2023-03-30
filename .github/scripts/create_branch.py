@@ -74,7 +74,6 @@ is_hotfix_branch = check_if_is_hotfix_branch(args.head_branch)
 if not (is_release_branch or is_hotfix_branch):
     raise ValueError(f"Head branch {args.head_branch} must be a release or a hotfix branch.")
 
-
 owner, repo = get_owner_and_repo(args.repo)
 url = f"https://api.github.com/repos/{owner}/{repo}/git/refs"
 
