@@ -1,0 +1,14 @@
+name: test_startswith
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  if_not_release_or_hotfix:
+    if: !(startsWith($GITHUB_HEAD_REF, 'release/v') || startsWith($GITHUB_HEAD_REF, 'hotfix/v'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: something
+        run: echo "not a release or a hotfix"
