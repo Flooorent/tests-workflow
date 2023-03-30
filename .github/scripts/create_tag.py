@@ -78,7 +78,6 @@ owner, repo = get_owner_and_repo(args.repo)
 url = f"https://api.github.com/repos/{owner}/{repo}/git/refs"
 
 tag_version = get_tag_version(args.head_branch)
-target_branch_name = f"test-dev/{tag_version}"
 
 headers = {
   "Accept": "application/vnd.github+json",
@@ -90,7 +89,7 @@ req = requests.post(
   url,
   headers=headers,
   json={
-    "ref": f"refs/tags/{target_branch_name}",
+    "ref": f"refs/tags/{tag_version}",
     "sha": args.sha,
   }
 )
