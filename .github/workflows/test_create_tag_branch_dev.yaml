@@ -25,10 +25,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: set env vars
-        run: |
-          echo "TAG_NAME=${GITHUB_HEAD_REF#release/}" >> $GITHUB_ENV
-
       - name: create prod branch
         run: |
           export PYTHONPATH=$PYTHONPATH:$GITHUB_WORKSPACE
@@ -36,7 +32,7 @@ jobs:
           --repo $GITHUB_REPOSITORY \
           --gh-token ${{ secrets.GITHUB_TOKEN }} \
           --sha ${{ github.event.pull_request.head.sha }} \
-          --tag ${{ env.TAG_NAME }}
+          --head-branch $GITHUB_HEAD_REF
 
       - name: create prod tag
         run: |
@@ -45,4 +41,4 @@ jobs:
           --repo $GITHUB_REPOSITORY \
           --gh-token ${{ secrets.GITHUB_TOKEN }} \
           --sha ${{ github.event.pull_request.head.sha }} \
-          --tag ${{ env.TAG_NAME }}
+          --head-branch $GITHUB_HEAD_REF
