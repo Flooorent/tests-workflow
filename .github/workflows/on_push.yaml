@@ -1,9 +1,6 @@
 name: test_startswith
 
-on:
-  push:
-    branches:
-      - '*'
+on: push
 
 jobs:
   job_1:
