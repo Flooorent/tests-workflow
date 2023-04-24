@@ -1,0 +1,13 @@
+name: test_startswith
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  job_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo something
+        run: echo "something"
