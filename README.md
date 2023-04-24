@@ -7,3 +7,4 @@
   - use correct commit sha
   - specifying commit sha doesn't work, update main branch protection rule and require linear history
   - try squashing commits
+- test 3: check that on_push workflow is not triggered for 'feature/something'
